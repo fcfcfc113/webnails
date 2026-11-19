@@ -1,0 +1,218 @@
+/* ───────── Riso inks ───────── */
+:root {
+  /* Signature print run. Each season repaints these at runtime (src/season.js). */
+  --paper: #f5f6f8;
+  --paper-2: #eceef3;
+  --card: #ffffff;         /* lighter stock for tickets, strips, menus */
+  --ink: #2b3e91;          /* text ink on paper */
+  --ink-deep: #151f55;     /* text on sun / light fields */
+  --on-ink: #ffffff;       /* text on ink fields */
+  --accent-on-ink: #ff48b0;
+  --pink: #ff48b0;         /* primary field ink */
+  --pink-soft: #ffc2e3;
+  --on-primary: #151f55;
+  --aqua: #5ec8e5;         /* secondary field ink */
+  --on-secondary: #151f55;
+  --sun: #ffe14d;
+  --violet: #5a2e84;       /* overprint */
+  --error: #b0124f;
+  --blend: multiply;       /* how inks overprint; screen on dark stock */
+
+  --display: 'Bricolage Grotesque', 'Onest', system-ui, sans-serif;
+  --body: 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1320px;
+  --radius: 14px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  transition: background-color 0.4s;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Riso paper grain over everything (pointer-transparent). */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .24 0 0 0 0 .57 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { background: var(--pink); color: var(--on-primary); }
+:focus-visible { outline: 3px solid var(--ink-deep); outline-offset: 3px; box-shadow: 0 0 0 7px var(--sun); }
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+html { scrollbar-color: var(--pink) var(--paper-2); }
+::-webkit-scrollbar { width: 12px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--paper-2); }
+::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 99px; border: 3px solid var(--paper-2); }
+
+.wrap { width: min(100% - 2 * var(--gutter), var(--max)); margin-inline: auto; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ───────── Type ───────── */
+.display {
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 96;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  margin: 0;
+  text-wrap: balance;
+}
+.h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  margin: 0 0 0.35em;
+  text-wrap: balance;
+}
+.lede { font-size: clamp(1.05rem, 1.4vw, 1.25rem); max-width: 46ch; margin: 0; text-wrap: pretty; }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+
+/* Off-register second ink: duplicate text in pink, multiplied, nudged. */
+.misreg { position: relative; isolation: isolate; }
+.misreg::before {
+  content: attr(data-ink);
+  position: absolute;
+  inset: 0;
+  color: var(--pink);
+  transform: translate(0.02em, 0.015em);
+  mix-blend-mode: var(--blend);
+  z-index: 1;
+  pointer-events: none;
+  white-space: inherit;
+}
+
+/* ───────── Buttons ───────── */
+.btn {
+  --bg: var(--ink);
+  --fg: var(--on-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85em 1.4em;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.35s var(--ease-out);
+}
+/* two ink plates: the fill (::after) and a second ink printed off-register beneath (::before) */
+.btn::before,
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: transform 0.35s var(--ease-out);
+}
+.btn::after { background: var(--bg); z-index: -1; }
+.btn::before { background: var(--pink); transform: translate(2px, 2px); z-index: -2; }
+.btn:hover { transform: translate(-1px, -2px); }
+.btn:hover::before { transform: translate(3px, 4px); }
+.btn:active { transform: translate(2px, 2px); }
+.btn:active::before { transform: translate(1px, 1px); }
+.btn--pink { --bg: var(--pink); --fg: var(--on-primary); }
+.btn--pink::before { background: var(--ink); }
+.btn[disabled] { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+/* ───────── Halftone fields ───────── */
+.halftone {
+  background-image: radial-gradient(circle at center, var(--dot, var(--pink)) 0 38%, transparent 40%);
+  background-size: var(--dot-size, 11px) var(--dot-size, 11px);
+}
+
+/* ───────── Perforation ───────── */
+.perf { border-top: 2px dashed currentColor; }
+
+/* ───────── Nail tips (almond) ───────── */
+.tip {
+  --w: 64px;
+  width: var(--w);
+  aspect-ratio: 1 / 2.05;
+  border-radius: 50% 50% 44% 44% / 60% 60% 40% 40%;
+  position: relative;
+  overflow: hidden;
+  flex: none;
+  /* printed keyline in blue ink: flat, no shading */
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+/* gloss mark: an opaque flat white sliver, printed like any other ink */
+.tip::after {
+  content: '';
+  position: absolute;
+  left: 24%;
+  top: 11%;
+  width: 11%;
+  height: 26%;
+  border-radius: 99px;
+  background: #fff;
+  transform: rotate(-8deg);
+}
+
+/* "sample" marker for placeholder content */
+.sample {
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 4px 8px 3px;
+  border: 1.5px dashed currentColor;
+  border-radius: 6px;
+  vertical-align: 0.15em;
+  margin-right: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ───────── Season change: the new print run rolls down the page ───────── */
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) {
+  animation: ink-roll 0.95s cubic-bezier(0.65, 0, 0.25, 1) both;
+}
+@keyframes ink-roll {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}

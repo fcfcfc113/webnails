@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T00:00:00Z",
+  "title": "Design System: Petal & Polish",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "primary", "displayName": "Medium Blue Ink", "canonical": "#2b3e91", "tonalRamp": ["#0e1538", "#151f55", "#1f2d73", "#2b3e91", "#4a5eae", "#7a89c7", "#adb7de", "#dfe3f3"] },
+      "pink": { "role": "primary", "displayName": "Fluorescent Pink", "canonical": "#ff48b0", "tonalRamp": ["#5c0a38", "#8f1259", "#c81f80", "#ff48b0", "#ff74c3", "#ff9fd5", "#ffc2e3", "#ffe8f4"] },
+      "aqua": { "role": "secondary", "displayName": "Pool Aqua", "canonical": "#5ec8e5", "tonalRamp": ["#0f3a46", "#18596b", "#2a8aa4", "#5ec8e5", "#84d6ec", "#a9e3f2", "#cdeff8", "#ecf8fc"] },
+      "sun": { "role": "secondary", "displayName": "Sunflower", "canonical": "#ffe14d", "tonalRamp": ["#4a3d00", "#7a6500", "#b39400", "#e6c41a", "#ffe14d", "#ffea80", "#fff2b0", "#fffadf"] },
+      "violet": { "role": "tertiary", "displayName": "Overprint Violet", "canonical": "#5a2e84", "tonalRamp": ["#1e0f2d", "#331a4b", "#47236a", "#5a2e84", "#7a52a1", "#9d7fbd", "#c3b0d9", "#e8dff1"] },
+      "pink-soft": { "role": "tertiary", "displayName": "Petal Pink Tint", "canonical": "#ffc2e3", "tonalRamp": ["#8f1259", "#c81f80", "#ff48b0", "#ff74c3", "#ff9fd5", "#ffc2e3", "#ffdbee", "#fff0f8"] },
+      "paper": { "role": "neutral", "displayName": "Cool Riso Stock", "canonical": "#f5f6f8", "tonalRamp": ["#2a2c31", "#4a4d55", "#757984", "#a3a7b1", "#cfd2d9", "#eceef3", "#f5f6f8", "#fbfbfc"] },
+      "paper-2": { "role": "neutral", "displayName": "Shadow Stock", "canonical": "#eceef3", "tonalRamp": ["#2a2c31", "#4a4d55", "#757984", "#a3a7b1", "#cfd2d9", "#eceef3", "#f5f6f8", "#fbfbfc"] },
+      "ink-deep": { "role": "neutral", "displayName": "Deep Ink", "canonical": "#151f55", "tonalRamp": ["#070b20", "#0e1538", "#151f55", "#1f2d73", "#2b3e91", "#4a5eae", "#7a89c7", "#adb7de"] },
+      "white": { "role": "neutral", "displayName": "Bright White", "canonical": "#ffffff", "tonalRamp": ["#3a3a3a", "#5e5e5e", "#848484", "#ababab", "#cfcfcf", "#e8e8e8", "#f5f5f5", "#ffffff"] },
+      "error-ink": { "role": "neutral", "displayName": "Error Ink", "canonical": "#b0124f", "tonalRamp": ["#3d0619", "#640a2c", "#8a0e3d", "#b0124f", "#c2185b", "#d9578a", "#ec9bba", "#f8dbe6"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline and footer sign; may carry the off-register pink overprint." },
+      "headline": { "displayName": "Headline", "purpose": "One short section headline per field." },
+      "price": { "displayName": "Price", "purpose": "Menu prices, the loudest element on each row." },
+      "title": { "displayName": "Title", "purpose": "Group heads, street, phone, ticket time." },
+      "body": { "displayName": "Body", "purpose": "Running copy; ledes cap at 46ch." },
+      "label": { "displayName": "Label", "purpose": "Uppercase tab days, ticket number, sample markers, today chip." }
+    },
+    "shadows": [
+      { "name": "button-plate", "value": "::before second ink, transform: translate(2px, 2px); hover translate(3px, 4px)", "purpose": "Off-register second plate under every button (pink under blue, blue under pink)." },
+      { "name": "card-plate", "value": "::before ink, transform: rotate(var(--tilt)) translate(6px, 7px); border-radius: 22px", "purpose": "Ink plate under tilted tip cards." },
+      { "name": "ticket-plate", "value": "::before pink, transform: translate(8px, 9px); notch mask", "purpose": "Pink plate under the booking ticket." },
+      { "name": "tip-keyline", "value": "inset 0 0 0 2px var(--ink)", "purpose": "Printed outline on nail tips; not a shadow." },
+      { "name": "focus-ring", "value": "outline: 3px solid var(--ink-deep); outline-offset: 3px; box-shadow: 0 0 0 7px var(--sun)", "purpose": "Global :focus-visible treatment." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "All lifts, plate shifts, tilts, fan-in, and tear." },
+      { "name": "button-lift", "value": "0.35s", "purpose": "Button and plate transform." },
+      { "name": "card-lift", "value": "0.5s", "purpose": "Tip-card straighten and lift." },
+      { "name": "tab-tear", "value": "0.7s", "purpose": "Tear-off tab swings off its perforation and fades." },
+      { "name": "reduced-motion", "value": "durations to 0.01ms", "purpose": "prefers-reduced-motion collapses all animation and smooth scroll." }
+    ],
+    "breakpoints": [
+      { "name": "phone-nav", "value": "560px" },
+      { "name": "phone", "value": "640px" },
+      { "name": "stack", "value": "820px" },
+      { "name": "tablet", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Blue ink pill with a pink plate printed off-register beneath.",
+      "html": "<button class=\"ds-btn\">Book now</button>",
+      "css": ".ds-btn { --bg: #2b3e91; --plate: #ff48b0; color: #fff; display: inline-flex; align-items: center; gap: .5em; border: 0; border-radius: 999px; padding: .85em 1.4em; background: transparent; font-family: 'Bricolage Grotesque', 'Onest', system-ui, sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; position: relative; isolation: isolate; cursor: pointer; transition: transform .35s cubic-bezier(0.16,1,0.3,1); } .ds-btn::before, .ds-btn::after { content: ''; position: absolute; inset: 0; border-radius: inherit; transition: transform .35s cubic-bezier(0.16,1,0.3,1); } .ds-btn::after { background: var(--bg); z-index: -1; } .ds-btn::before { background: var(--plate); transform: translate(2px,2px); z-index: -2; } .ds-btn:hover { transform: translate(-1px,-2px); } .ds-btn:hover::before { transform: translate(3px,4px); } .ds-btn:active { transform: translate(2px,2px); } .ds-btn:active::before { transform: translate(1px,1px); } .ds-btn:focus-visible { outline: 3px solid #151f55; outline-offset: 3px; box-shadow: 0 0 0 7px #ffe14d; }"
+    },
+    {
+      "name": "Pink Button",
+      "kind": "button",
+      "refersTo": "button-pink",
+      "description": "Pink pill with deep-ink text and a blue plate beneath.",
+      "html": "<button class=\"ds-btn-pink\">Hold my chair</button>",
+      "css": ".ds-btn-pink { color: #151f55; display: inline-flex; border: 0; border-radius: 999px; padding: .85em 1.4em; background: transparent; font-family: 'Bricolage Grotesque', 'Onest', system-ui, sans-serif; font-weight: 700; font-size: 1rem; position: relative; isolation: isolate; cursor: pointer; transition: transform .35s cubic-bezier(0.16,1,0.3,1); } .ds-btn-pink::before, .ds-btn-pink::after { content: ''; position: absolute; inset: 0; border-radius: inherit; transition: transform .35s cubic-bezier(0.16,1,0.3,1); } .ds-btn-pink::after { background: #ff48b0; z-index: -1; } .ds-btn-pink::before { background: #2b3e91; transform: translate(2px,2px); z-index: -2; } .ds-btn-pink:hover { transform: translate(-1px,-2px); } .ds-btn-pink:hover::before { transform: translate(3px,4px); } .ds-btn-pink:focus-visible { outline: 3px solid #151f55; outline-offset: 3px; box-shadow: 0 0 0 7px #ffe14d; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Paper-filled field; focus swaps to a pink border on white.",
+      "html": "<input class=\"ds-input\" placeholder=\"(555) 123-4567\">",
+      "css": ".ds-input { font: inherit; font-family: 'Onest', system-ui, sans-serif; color: #2b3e91; background: #f5f6f8; border: 2px solid transparent; border-radius: 12px; padding: .8em 1em; caret-color: #ff48b0; transition: border-color .2s, background-color .2s; } .ds-input::placeholder { color: rgb(43 62 145 / .8); } .ds-input:focus-visible { outline: 0; border-color: #ff48b0; background: #fff; } .ds-input[aria-invalid='true'] { border-color: #b0124f; }"
+    },
+    {
+      "name": "Slot Chip",
+      "kind": "chip",
+      "refersTo": "slot-chip",
+      "description": "Dashed time-slot chip; selected becomes solid ink and tilts.",
+      "html": "<span class=\"ds-slot\">Tomorrow 10:30 AM</span> <span class=\"ds-slot is-on\">Fri 2:30 PM</span>",
+      "css": ".ds-slot { display: inline-block; padding: .55em 1em; border: 2px dashed rgb(43 62 145 / .45); border-radius: 10px; color: #2b3e91; font-family: 'Onest', system-ui, sans-serif; font-size: .95rem; cursor: pointer; transition: background-color .2s, transform .3s cubic-bezier(0.16,1,0.3,1); } .ds-slot:hover { background: #ffc2e3; } .ds-slot.is-on { background: #2b3e91; color: #fff; border: 2px solid #2b3e91; transform: rotate(-2deg); }"
+    },
+    {
+      "name": "Header Nav",
+      "kind": "nav",
+      "description": "Onest 600 links with a pink highlighter bar sweeping in on hover.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Designs</a><a href=\"#\">Prices</a><a href=\"#\">Visit</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 28px; font-family: 'Onest', system-ui, sans-serif; } .ds-nav a { color: #2b3e91; text-decoration: none; font-weight: 600; padding: 2px; background: linear-gradient(#ff48b0, #ff48b0) 0 92% / 0 40% no-repeat; transition: background-size .4s cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover { background-size: 100% 40%; } .ds-nav a:focus-visible { outline: 3px solid #151f55; outline-offset: 3px; box-shadow: 0 0 0 7px #ffe14d; }"
+    },
+    {
+      "name": "Tip Card",
+      "kind": "card",
+      "refersTo": "tip-card",
+      "description": "Tilted paper card with an ink plate beneath and a flat almond tip.",
+      "html": "<div class=\"ds-tipcard-wrap\"><button class=\"ds-tipcard\"><span class=\"ds-tip\"></span><b>Cherry Dots</b><small>Picnic in Montmartre</small></button></div>",
+      "css": ".ds-tipcard-wrap { position: relative; display: inline-block; --tilt: -3deg; } .ds-tipcard-wrap::before { content: ''; position: absolute; inset: 0; border-radius: 22px; background: #2b3e91; transform: rotate(var(--tilt)) translate(6px,7px); } .ds-tipcard { position: relative; width: 190px; border: 0; border-radius: 22px; background: #f5f6f8; padding: 28px 18px 18px; display: grid; justify-items: center; gap: 6px; color: #151f55; font-family: 'Onest', system-ui, sans-serif; transform: rotate(var(--tilt)); transition: transform .5s cubic-bezier(0.16,1,0.3,1); cursor: pointer; } .ds-tipcard:hover { transform: rotate(0) translateY(-6px); } .ds-tipcard b { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; margin-top: 12px; } .ds-tipcard:focus-visible { outline: 3px solid #151f55; outline-offset: 3px; box-shadow: 0 0 0 7px #ffe14d; } .ds-tip { width: 90px; aspect-ratio: 1 / 2.05; border-radius: 50% 50% 44% 44% / 60% 60% 40% 40%; position: relative; overflow: hidden; box-shadow: inset 0 0 0 2px #2b3e91; background: radial-gradient(circle, #2b3e91 0 26%, transparent 28%) 0 0 / 14px 14px, #ff48b0; } .ds-tip::after { content: ''; position: absolute; left: 24%; top: 11%; width: 11%; height: 26%; border-radius: 99px; background: #fff; transform: rotate(-8deg); }"
+    },
+    {
+      "name": "Tear-off Tab",
+      "kind": "custom",
+      "description": "Vertical slot tab under a dashed perforation; signature booking control.",
+      "html": "<div class=\"ds-strip\"><button class=\"ds-tab\"><span class=\"d\">Tomorrow</span><span class=\"t\">10:30 AM</span></button><button class=\"ds-tab\"><span class=\"d\">Fri</span><span class=\"t\">2:30 PM</span></button></div>",
+      "css": ".ds-strip { display: flex; border-top: 2px dashed #2b3e91; background: #fff; } .ds-tab { min-width: 70px; height: 168px; border: 0; border-left: 2px dashed rgb(43 62 145 / .6); background: transparent; color: #2b3e91; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 10px; cursor: pointer; transition: background-color .25s; } .ds-tab .d { font-family: 'Onest', sans-serif; font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; } .ds-tab .t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.45rem; letter-spacing: -0.02em; } .ds-tab:hover { background: #ffc2e3; } .ds-tab:focus-visible { outline: 3px solid #151f55; outline-offset: -5px; box-shadow: 0 0 0 7px #ffe14d; }"
+    },
+    {
+      "name": "Sample Marker",
+      "kind": "chip",
+      "refersTo": "sample-marker",
+      "description": "Dashed uppercase marker required on all placeholder content.",
+      "html": "<span class=\"ds-sample\">Sample prices</span>",
+      "css": ".ds-sample { display: inline-block; font-family: 'Onest', system-ui, sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; line-height: 1; padding: 4px 8px 3px; border: 1.5px dashed currentColor; border-radius: 6px; color: #2b3e91; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Riso Flyer on the Salon Door",
+    "overview": "The whole site is one community flyer run through a risograph: cool white stock with fine paper grain, fluorescent pink owning big fields, medium-blue as the text ink, aqua and sunflower as the third and fourth drums. Everything is flat ink. Depth, tone, and emphasis come from what a printer can actually do: overprint (pink multiplied over blue turns violet), a second plate printed slightly off-register, and halftone dot screens. Nothing is shaded, blurred, or photographed.\n\nSections are full-bleed ink fields (paper, aqua, pink, paper, ink) stacked like a folded flyer, separated by dashed perforations. Type carries volume: headlines and prices are set huge and tight in Bricolage Grotesque, while Onest body copy stays small and plain. Each section keeps one charged empty field (a dot disc, a tilted card row, a single giant price) rather than filling every gap.\n\nThe booking interaction is part of the printed object: tear-off tabs on the hero strip are real open slots, and the booking form is a punched ticket with a stub. Placeholder facts are never presented as real; they wear a dashed \"Sample\" marker.",
+    "keyCharacteristics": [
+      "Flat Riso inks on cool grained paper; no gradients-as-shading, no photos.",
+      "Overprint by real `multiply` blending, violet where pink crosses blue.",
+      "Depth only through offset flat ink plates beneath an object.",
+      "Tone through halftone dot screens, never smooth blends.",
+      "Display type and prices shout; body text stays quiet.",
+      "Dashed perforations as the section and tab divider."
+    ],
+    "rules": [
+      { "name": "The Overprint Rule", "body": "Where pink sits over blue, blend with `mix-blend-mode: multiply` so the crossing reads violet. Never paint a fake overlap.", "section": "colors" },
+      { "name": "The Text-on-Pink Rule", "body": "Text on a pink field is Deep Ink, never Medium Blue Ink or white.", "section": "colors" },
+      { "name": "The Volume Rule", "body": "Type size carries importance. A price is set larger than the service name it belongs to.", "section": "typography" },
+      { "name": "The Off-Register Rule", "body": "Display type may carry a pink duplicate offset (0.02em, 0.015em) multiplied over it. Use it on the hero headline and the footer sign, not on every heading.", "section": "typography" },
+      { "name": "The Second-Plate Rule", "body": "If something needs to lift, print a second flat ink plate under it, offset down-right. Never use a blurred or spread shadow.", "section": "elevation" },
+      { "name": "The Halftone Rule", "body": "Tone is a dot screen (radial-gradient dots, 7 to 14px cells), never a smooth gradient.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do build every surface from the four inks plus paper; let violet appear through `multiply` overprint.",
+      "Do lift objects with an offset flat ink plate (2 to 9px down-right).",
+      "Do render tone as halftone dots and tips as flat ink with a 2px inset ink keyline and an opaque white gloss sliver.",
+      "Do set prices larger than the line's service name, in Bricolage 800 with tabular figures.",
+      "Do divide with dashed perforations and dotted rules.",
+      "Do wear a dashed \"Sample\" marker on every placeholder fact.",
+      "Do use the 3px Deep Ink outline plus sunflower ring for focus."
+    ],
+    "donts": [
+      "Don't use blurred or spread box-shadows for depth.",
+      "Don't shade with smooth gradients; screen it with dots.",
+      "Don't put Medium Blue Ink or white text on a pink field; use Deep Ink.",
+      "Don't add spa photography, script logos, or blush-pink gradients.",
+      "Don't present placeholder prices, hours, or reviews as real."
+    ]
+  }
+}
